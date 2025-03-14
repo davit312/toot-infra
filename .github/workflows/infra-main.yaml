@@ -1,0 +1,39 @@
+name: Infrastructure Workflow
+
+# This workflow is triggered manually using the GitHub UI
+on:
+  workflow_dispatch:
+    # Optional inputs that can be provided when triggering the workflow
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      debug_enabled:
+        description: 'Run the workflow with debug logging'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Show selected inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Debug enabled: ${{ github.event.inputs.debug_enabled }}"
+          
+      - name: Run a simple command
+        run: echo "This workflow was triggered manually!"
+
+      - name: Test if terraform is installed
+        run: terraform --version || echo "Terraform is not installed"
