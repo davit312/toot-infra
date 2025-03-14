@@ -35,8 +35,8 @@ jobs:
       - name: Run a simple command
         run: echo "This workflow was triggered manually!"
 
-      - name: Install terraform
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y terraform
-          terraform --version
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform version
+        run: terraform version
