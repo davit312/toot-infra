@@ -15,3 +15,9 @@ variable "instance_types" {
   type        = list(string)
   default     = ["t3.medium"]
 }
+
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.31"
+}
