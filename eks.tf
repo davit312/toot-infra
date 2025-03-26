@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "toot-eks" {
-  name = "toot-eks"
+  name = var.cluster_name
 
   access_config {
     authentication_mode = "API"

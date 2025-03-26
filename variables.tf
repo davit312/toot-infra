@@ -16,6 +16,13 @@ variable "instance_types" {
   default     = ["t3.medium"]
 }
 
+variable "cluster_name" {
+  description = "Kubernetes cluster name"
+  type        = string
+  default     = "k8-toot"
+}
+
+
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
