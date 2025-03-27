@@ -26,5 +26,15 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "1.31"
+  default     = "1.32"
+}
+
+variable "addons_version" {
+  default = {
+    vpc_cni    = "v1.19.2-eksbuild.5"
+    coredns    = "v1.11.4-eksbuild.2"
+    kube_proxy = "v1.32.0-eksbuild.2"
+  }
+
+
 }

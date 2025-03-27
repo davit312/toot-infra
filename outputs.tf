@@ -14,3 +14,7 @@ output "kubectl_config" {
   value       = "aws eks update-kubeconfig --name ${aws_eks_cluster.toot-eks.name} --region ${var.region}"
 }
 
+output "current_aws_user" {
+  description = "Current aws user arn"
+  value       = data.aws_caller_identity.current.arn
+}
