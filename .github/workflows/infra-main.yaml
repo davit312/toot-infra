@@ -47,6 +47,8 @@ jobs:
           helm version
           kubectl version --client=true
       
+      - name: Terraform init
+        run: terraform init
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
