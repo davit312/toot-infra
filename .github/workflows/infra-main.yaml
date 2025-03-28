@@ -55,7 +55,7 @@ jobs:
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
-          terraform plan
+          terraform apply -auto-approve
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
