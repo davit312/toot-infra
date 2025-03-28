@@ -59,7 +59,7 @@ jobs:
           cat >tfvars <<EOF 
           ${SECRET_TFVARS}
           EOF
-          erraform plan -var-file tfvars
+          terraform plan -var-file tfvars
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
