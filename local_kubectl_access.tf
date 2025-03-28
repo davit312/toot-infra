@@ -23,5 +23,9 @@ resource "null_resource" "config-kubectl" {
     command = "aws eks update-kubeconfig --name ${aws_eks_cluster.toot-eks.name} --region ${var.region}"
   }
 
+  triggers = {
+    always = timestamp()
+  }
+
   depends_on = [aws_eks_access_policy_association.terraform_policy]
 }
