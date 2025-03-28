@@ -50,6 +50,12 @@ jobs:
       
       - name: Terraform init
         run: terraform init
+      - name: Download Terraform State
+        continue-on-error: true
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-state
+          path: ./
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
@@ -58,5 +64,15 @@ jobs:
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
           terraform destroy -auto-approve
+      - name: Upload Terraform State
+        continue-on-error: true
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-state
+          path: |
+            ./terraform.tfstate
+            ./terraform.tfstate.backup*
+
       - name: check if tfstate created
         run: ls -la
