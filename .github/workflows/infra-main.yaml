@@ -51,11 +51,7 @@ jobs:
       - name: Terraform init
         run: terraform init
       - name: Download Terraform State
-        continue-on-error: true
         uses: actions/download-artifact@v3
-        with:
-          name: terraform-state
-          path: ./
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
