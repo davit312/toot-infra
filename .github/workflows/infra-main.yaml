@@ -50,8 +50,8 @@ jobs:
       
       - name: Terraform init
         run: terraform init
-      - name: Download Terraform State
-        uses: actions/download-artifact@v3
+      - name: Download Terraform State and other artifacts
+        uses: actions/download-artifact@v4
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
@@ -63,7 +63,7 @@ jobs:
       - name: Upload Terraform State
         continue-on-error: true
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: terraform-state
           path: |
