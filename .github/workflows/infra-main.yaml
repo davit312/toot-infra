@@ -46,3 +46,12 @@ jobs:
         run: |
           helm version
           kubectl version --client=true
+      
+      - name: Create infrastructure
+        if: ${{ github.event.inputs.destroy == 'false' }}
+        run: |
+          terraform plan
+      - name: Destrou infrastructure
+        if: ${{ github.event.inputs.destroy == 'true' }}
+        run: |
+          terraform fmt # for testing
