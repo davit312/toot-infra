@@ -53,8 +53,10 @@ jobs:
         run: terraform init
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
+        with:
+          SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
         run: |
-          echo "${{ secrets.SECRET_TFVARS }}" > tfvars
+          echo "${SECRET_TFVARS}" > tfvars
           terraform plan -var-file tfvars
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
