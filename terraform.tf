@@ -14,6 +14,11 @@ terraform {
       version = "3.0.0-pre2"
     }
   }
+  backend "s3" {
+    bucket = "tfstate-7455"
+    key    = "infrastructure-state"
+    region = "us-west-2"
+  }
 }
 
 provider "aws" {
