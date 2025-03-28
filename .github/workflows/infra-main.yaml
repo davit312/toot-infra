@@ -13,7 +13,7 @@ env:
   AWS_REGION: us-west-2
 
 jobs:
-  manual-job:
+  create-aws-infra:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -28,7 +28,12 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'v3.16.3'
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
 
       - name: Show selected inputs
         run: |
@@ -37,4 +42,7 @@ jobs:
         run: terraform version
       - name: AWS user info
         run: aws sts get-caller-identity
-        
+      - name: Check kubernetes tools versions
+        run: |
+          helm version
+          kubectl version
