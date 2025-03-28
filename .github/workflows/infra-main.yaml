@@ -50,7 +50,7 @@ jobs:
           kubectl version --client=true
       
       - name: Terraform init
-        run: echo 1; # terraform init
+        run: terraform init
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         env:
@@ -59,8 +59,7 @@ jobs:
           cat >tfvars <<EOF 
           ${SECRET_TFVARS}
           EOF
-          cat tfvars
-          # terraform plan -var-file tfvars
+          erraform plan -var-file tfvars
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
