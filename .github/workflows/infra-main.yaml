@@ -14,7 +14,8 @@ env:
   TF_VAR_github_env: "true"
 
 jobs:
-  create-aws-infra:
+  aws-infraatructure:
+    name: ${{ github.event.inputs.environment == 'true' && '❌ Destroying infrastructure' || '🛠️ Creating infrastructure' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
