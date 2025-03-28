@@ -62,5 +62,10 @@ jobs:
           terraform apply -var-file tfvars -auto-approve
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
+        env:
+          SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
         run: |
-          terraform destroy -auto-approve
+          cat >tfvars <<EOF 
+          ${SECRET_TFVARS}
+          EOF
+          terraform destroy -auto-approve -var-file tfvars 
