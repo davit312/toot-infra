@@ -1,3 +1,8 @@
+variable "github_env" {
+  type = string
+  default = ""
+}
+
 terraform {
   required_providers {
     aws = {
@@ -13,7 +18,7 @@ terraform {
 
 provider "aws" {
   region  = "us-west-2"
-  profile = "terraform"
+  profile = var.github_env == "" ? "" : "terraform"
 }
 
 provider "helm" {
