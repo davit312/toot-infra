@@ -15,7 +15,7 @@ env:
 
 jobs:
   aws-infraatructure:
-    name: ${{ github.event.inputs.environment == 'true' && '❌ Destroying infrastructure' || '🛠️ Creating infrastructure' }}
+    name: ${{ github.event.inputs.destroy == 'true' && '❌ Destroying infrastructure' || '🛠️ Creating infrastructure' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
