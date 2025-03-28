@@ -1,24 +1,16 @@
 name: Infrastructure Workflow
 
-# This workflow is triggered manually using the GitHub UI
 on:
   workflow_dispatch:
-    # Optional inputs that can be provided when triggering the workflow
     inputs:
-      environment:
-        description: 'Environment to deploy to'
-        required: true
-        default: 'development'
-        type: choice
-        options:
-          - development
-          - staging
-          - production
-      debug_enabled:
-        description: 'Run the workflow with debug logging'
+      destroy:
+        description: 'Destroy infrastructure'
         required: false
         default: false
         type: boolean
+
+env:
+  AWS_REGION: us-west-2
 
 jobs:
   manual-job:
@@ -26,17 +18,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Show selected inputs
-        run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Debug enabled: ${{ github.event.inputs.debug_enabled }}"
-          
-      - name: Run a simple command
-        run: echo "This workflow was triggered manually!"
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.11.3"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
+
+      - name: Show selected inputs
+        run: |
+          echo "Is destroy: ${{ github.event.inputs.destroy }}"
       - name: Terraform version
         run: terraform version
+      - name: AWS user info
+        run: aws sts get-caller-identity
+        
