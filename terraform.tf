@@ -18,7 +18,7 @@ terraform {
 
 provider "aws" {
   region  = "us-west-2"
-  profile = var.github_env == "" ? "" : "terraform"
+  profile = var.github_env != "" ? "" : "terraform"
 }
 
 provider "helm" {
