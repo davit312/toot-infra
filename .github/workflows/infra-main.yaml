@@ -54,7 +54,9 @@ jobs:
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
           terraform plan
-      - name: Destrou infrastructure
+      - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
           terraform fmt # for testing
+      - name: check if tfstate created
+        run: ls -la
