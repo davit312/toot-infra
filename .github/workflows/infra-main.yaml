@@ -61,7 +61,6 @@ jobs:
         run: |
           terraform destroy -auto-approve
       - name: Upload Terraform State
-        continue-on-error: true
         if: always()
         uses: actions/upload-artifact@v4
         with:
