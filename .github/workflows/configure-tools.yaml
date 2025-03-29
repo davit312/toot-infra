@@ -1,4 +1,4 @@
-name: Config automation tools
+name: ${{github.run_number}} - Config automation tools
 
 on:
   workflow_dispatch:
