@@ -1,0 +1,34 @@
+name: Config automation tootls
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-west-2
+  TF_VAR_github_env: "true"
+
+jobs:
+  aws-infraatructure:
+    name: Configure automation tools
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+      
+      - name: Create secret of aws credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          kubectl create secret generic awssm-secrets \
+            --from-literal "access-key=${AWS_ACCESS_KEY_ID}" \
+            --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace external-secret \
+            -o yaml --dry-run=client
