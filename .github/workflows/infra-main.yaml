@@ -72,4 +72,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           echo "${AWS_ACCESS_KEY_ID}"
-          ech "${AWS_SECRET_ACCESS_KEY}"
+          echo "${AWS_SECRET_ACCESS_KEY}"
