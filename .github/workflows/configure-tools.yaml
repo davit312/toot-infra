@@ -41,6 +41,6 @@ jobs:
         run: |
           kubectl create secret generic aws-login \
             --from-literal "access-key=${AWS_ACCESS_KEY_ID}" \
-            --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace external-secret 
+            --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace external-secrets 
       - name: Create cluster secret store
         run: kubectl apply -f ./etc/clusterSecretStore.yaml
