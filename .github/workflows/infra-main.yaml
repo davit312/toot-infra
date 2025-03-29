@@ -50,7 +50,7 @@ jobs:
           kubectl version --client=true
       
       - name: Terraform init
-        run: echo # terraform init
+        run: terraform init
       - name: Create tfvars file 
         env:
           SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
@@ -61,9 +61,8 @@ jobs:
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
         run: |
-          echo # terraform apply -var-file tfvars -auto-approve
+          terraform apply -var-file tfvars -auto-approve
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
         run: |
-          echo # terraform destroy -auto-approve -var-file tfvars
-      - run: cat tfvars
+          terraform destroy -auto-approve -var-file tfvars
