@@ -39,7 +39,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          kubectl create secret generic awssm-secrets \
+          kubectl create secret generic aws-login \
             --from-literal "access-key=${AWS_ACCESS_KEY_ID}" \
             --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace external-secret \
             -o yaml --dry-run=client
+      - name: Create cluster secret store
+        run: kubectl apply -f ./etc/clusterSecretStore.yaml
