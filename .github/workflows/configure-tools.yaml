@@ -41,6 +41,6 @@ jobs:
         run: |
           kubectl create secret generic aws-login \
             --from-literal "access-key=${AWS_ACCESS_KEY_ID}" \
-            --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace external-secrets 
+            --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace argocd 
       - name: Create secret store for argocd
         run: kubectl apply -f ./etc/secretStore.yaml
