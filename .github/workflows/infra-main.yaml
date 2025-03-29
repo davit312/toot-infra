@@ -51,21 +51,19 @@ jobs:
       
       - name: Terraform init
         run: terraform init
+      - name: Create tfvars file 
+        env:
+          SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
+        run: |
+          cat >tfvars <<EOF 
+          ${SECRET_TFVARS}
+          EOF
       - name: Create infrastructure
         if: ${{ github.event.inputs.destroy == 'false' }}
-        env:
-          SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
         run: |
-          cat >tfvars <<EOF 
-          ${SECRET_TFVARS}
-          EOF
-          terraform apply -var-file tfvars -auto-approve
+          echo # terraform apply -var-file tfvars -auto-approve
       - name: Destroy infrastructure
         if: ${{ github.event.inputs.destroy == 'true' }}
-        env:
-          SECRET_TFVARS: ${{ secrets.SECRET_TFVARS }}
         run: |
-          cat >tfvars <<EOF 
-          ${SECRET_TFVARS}
-          EOF
-          terraform destroy -auto-approve -var-file tfvars 
+          echo # terraform destroy -auto-approve -var-file tfvars
+      - run: cat tfvars
