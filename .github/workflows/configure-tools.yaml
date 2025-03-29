@@ -47,3 +47,5 @@ jobs:
           rm /tmp/aws-login.yaml 
       - name: Create secret store for argocd
         run: kubectl apply -f ./etc/secretStore.yaml
+      - name: Create external secret in argocd
+        run: kubectl apply -f etc/secret-argocd-repo.yaml
