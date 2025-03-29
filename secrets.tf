@@ -1,13 +1,13 @@
 resource "aws_secretsmanager_secret" "app-encryption" {
-  name = "app-encription"
+  name = "app-encription-1"
 }
 
 resource "aws_secretsmanager_secret" "db-secrets" {
-  name = "db-secrets"
+  name = "db-secrets-1"
 }
 
 resource "aws_secretsmanager_secret" "argocd-git-repo-key" {
-  name = "argocd-git-repo-key"
+  name = "argocd-git-repo-key-1"
 }
 
 /** **/
