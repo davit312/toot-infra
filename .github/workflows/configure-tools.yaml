@@ -15,7 +15,7 @@ env:
 
 jobs:
   aws-infraatructure:
-    name: Configure automation tools
+    name: ${{github.run_number}} - Configure automation tools
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
