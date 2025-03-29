@@ -2,6 +2,13 @@ name: Config automation tootls
 
 on:
   workflow_dispatch:
+    inputs:
+        cluster:
+          description: 'EKS cluster name'
+          required: true
+          default: 'k8-toot'
+          type: string
+
 
 env:
   AWS_REGION: us-west-2
@@ -22,7 +29,13 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Install kubectl
         uses: azure/setup-kubectl@v4
-      
+      - name: Config kubectl to connect cluster
+        run: |
+          aws eks update-kubeconfig \
+            --region ${{ env.AWS_REGION }} \
+        cluster:
+            --name ${{ github.event.inputs. }}
+
       - name: Create secret of aws credentials
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
