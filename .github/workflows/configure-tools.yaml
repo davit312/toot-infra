@@ -43,6 +43,8 @@ jobs:
             --from-literal "access-key=${AWS_ACCESS_KEY_ID}" \
             --from-literal "secret-access-key=${AWS_SECRET_ACCESS_KEY}" --namespace argocd \
             --dry-run=client -o yaml > /tmp/aws-login.yaml
+          kubectl apply -f /tmp/aws-login.yaml
+
           sed -i 's/namespace: argocd/namespace: mastodon/' /tmp/aws-login.yaml
           kubectl create namespace mastodon || true
           kubectl apply -f /tmp/aws-login.yaml
