@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: toot-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:davit312/toot-deploy.git
+    targetRevision: HEAD
+    path: mastodon
+    helm:
+      releaseName: toot
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mastodon
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - "CreateNamespace=true"
