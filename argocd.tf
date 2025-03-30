@@ -20,5 +20,5 @@ resource "helm_release" "argocd" {
     }
   ]
 
-  depends_on = [ null_resource.config-kubectl ]
+  depends_on = [null_resource.config-kubectl]
 }

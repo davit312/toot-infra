@@ -1,35 +1,35 @@
 resource "aws_secretsmanager_secret" "app-encryption" {
-  name = "app-encription-1"
+  name = "app-encription-2"
 }
 
 resource "aws_secretsmanager_secret" "db-secrets" {
-  name = "db-secrets-1"
+  name = "db-secrets-2"
 }
 
 resource "aws_secretsmanager_secret" "argocd-git-repo-key" {
-  name = "argocd-git-repo-key-1"
+  name = "argocd-git-repo-key-2"
 }
 
 /** **/
 
-resource  "aws_secretsmanager_secret_version" "app-encryption" {
+resource "aws_secretsmanager_secret_version" "app-encryption" {
   secret_id     = aws_secretsmanager_secret.app-encryption.id
   secret_string = jsonencode(var.app-encryption)
 }
 
-resource  "aws_secretsmanager_secret_version" "db-secrets" {
+resource "aws_secretsmanager_secret_version" "db-secrets" {
   secret_id     = aws_secretsmanager_secret.db-secrets.id
   secret_string = jsonencode(var.db-secrets)
 }
 
-resource  "aws_secretsmanager_secret_version" "argocd-git-repo-key" {
+resource "aws_secretsmanager_secret_version" "argocd-git-repo-key" {
   secret_id     = aws_secretsmanager_secret.argocd-git-repo-key.id
   secret_string = jsonencode(var.argocd-git-repo-key)
 }
 
 /** **/
 
-variable  "app-encryption" {
+variable "app-encryption" {
   sensitive = true
 }
 

@@ -3,7 +3,7 @@ resource "aws_eks_access_entry" "terraform_access" {
   principal_arn     = data.aws_caller_identity.current.arn
   kubernetes_groups = []
   type              = "STANDARD"
-  user_name  = "terraform"
+  user_name         = "terraform"
 }
 
 resource "aws_eks_access_policy_association" "terraform_policy" {

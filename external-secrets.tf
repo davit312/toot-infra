@@ -6,5 +6,5 @@ resource "helm_release" "external-secrets" {
   namespace        = "external-secrets"
   create_namespace = true
 
-  depends_on = [ null_resource.config-kubectl ]
+  depends_on = [null_resource.config-kubectl]
 }

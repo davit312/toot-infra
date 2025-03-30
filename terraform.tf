@@ -1,5 +1,5 @@
 variable "github_env" {
-  type = string
+  type    = string
   default = ""
 }
 

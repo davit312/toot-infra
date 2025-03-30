@@ -6,5 +6,5 @@ resource "helm_release" "ingress-nginx" {
   namespace        = "ingress-nginx"
   create_namespace = true
 
-  depends_on = [ null_resource.config-kubectl ]
+  depends_on = [null_resource.config-kubectl]
 }
