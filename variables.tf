@@ -1,3 +1,9 @@
+variable "cluster_name" {
+  description = "Kubernetes cluster name"
+  type        = string
+  default     = "k8-toot"
+}
+
 variable "region" {
   description = "AWS region"
   type        = string
@@ -16,13 +22,6 @@ variable "instance_types" {
   default     = ["t3.medium"]
 }
 
-variable "cluster_name" {
-  description = "Kubernetes cluster name"
-  type        = string
-  default     = "k8-toot"
-}
-
-
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
@@ -31,10 +30,9 @@ variable "kubernetes_version" {
 
 variable "addons_version" {
   default = {
-    vpc_cni    = "v1.19.2-eksbuild.5"
-    coredns    = "v1.11.4-eksbuild.2"
-    kube_proxy = "v1.32.0-eksbuild.2"
+    vpc_cni            = "v1.19.2-eksbuild.5"
+    coredns            = "v1.11.4-eksbuild.2"
+    kube_proxy         = "v1.32.0-eksbuild.2"
+    ebs_csi_driver = "v1.41.0-eksbuild.1"
   }
-
-
 }

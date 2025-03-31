@@ -18,8 +18,3 @@ output "current_aws_user" {
   description = "Current aws user arn"
   value       = data.aws_caller_identity.current.arn
 }
-
-output "load_balancer_dns" {
-  description = "Dns address of load balancer"
-  value       = data.aws_lb.ingress_lb.dns_name
-}
