@@ -13,6 +13,14 @@ terraform {
       source  = "hashicorp/helm"
       version = "3.0.0-pre2"
     }
+    tls = {
+      source = "hashicorp/tls"
+      version = "4.0.6"
+    }
+    null = {
+      source = "hashicorp/null"
+      version = "3.2.4-alpha.2"
+    }
   }
   backend "s3" {
     bucket = "tfstate-7455"
