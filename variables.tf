@@ -33,6 +33,6 @@ variable "addons_version" {
     vpc_cni            = "v1.19.2-eksbuild.5"
     coredns            = "v1.11.4-eksbuild.2"
     kube_proxy         = "v1.32.0-eksbuild.2"
-    ebs_csi_driver = "v1.41.0-eksbuild.1"
+    ebs_csi_driver     = "v1.41.0-eksbuild.1"
   }
 }
